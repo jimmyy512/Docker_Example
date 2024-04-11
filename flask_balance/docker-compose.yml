@@ -8,12 +8,14 @@ services:
     image: flask-demo:latest
     environment:
       - REDIS_HOST=redis-server
+      - REDIS_PASS=${REDIS_PASSWORD}
     networks:
       - backend
       - frontend
 
   redis-server:
     image: redis:latest
+    command: redis-server --requirepass ${REDIS_PASSWORD}
     networks:
       - backend
 

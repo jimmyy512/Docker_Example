@@ -1,10 +1,11 @@
 from flask import Flask
-from redis import Redis
+from redis import StrictRedis
 import os
 import socket
 
 app = Flask(__name__)
-redis = Redis(host=os.environ.get('REDIS_HOST', '127.0.0.1'), port=6379)
+redis = StrictRedis(host=os.environ.get('REDIS_HOST', '127.0.0.1'),
+                    port=6379, password=os.environ.get('REDIS_PASS'))
 
 
 @app.route('/')
